@@ -1,0 +1,82 @@
+#INCLUDE "totvs.ch"
+
+/* ---------------------------------------------------------------------------
+   Fonte....: AKCREDSND.TLPP  (SONDA v4 - TEMPORARIO, so ambiente de DEV)
+
+   Mudanca de estrategia: em vez de carimbar a SC9 DEPOIS (ela nao existe no
+   MT440GR), vamos IMPEDIR a liberacao ANTES. Esta sonda testa os dois pontos
+   da MATA440 que servem para isso.
+
+   Tambem verifica se existe adiantamento vinculado ao pedido na FIE - mesma
+   checagem que o PV_SemAdiantamento.prw ja faz. E' o que vai dizer se o
+   dinheiro entrou.
+
+   IMPORTANTE: os dois pontos retornam .T. (= NAO impede). A sonda observa e
+   nao altera comportamento nenhum. Apagar do RPO depois do teste.
+--------------------------------------------------------------------------- */
+
+User Function MT440VLD()
+    AkSnd("MT440VLD - inibir liberacao automatica")
+Return .T.
+
+User Function MT440AT()
+    AkSnd("MT440AT - impedir liberacao do pedido")
+Return .T.
+
+
+Static Function AkSnd(cPonto)
+
+    Local cFil    := ""
+    Local cNum    := ""
+    Local cCond   := ""
+    Local cMsg    := ""
+    Local lTemFIE := .F.
+    Local nAdiant := 0
+    Local aArea   := GetArea()
+
+    If Select("SC5") > 0 .And. !Empty(SC5->C5_NUM)
+        cFil  := SC5->C5_FILIAL
+        cNum  := SC5->C5_NUM
+        cCond := SC5->C5_CONDPAG
+    ElseIf Select("SC6") > 0 .And. !Empty(SC6->C6_NUM)
+        cFil  := SC6->C6_FILIAL
+        cNum  := SC6->C6_NUM
+    EndIf
+
+    // Existe adiantamento vinculado a este pedido?
+    // Mesma logica do PV_SemAdiantamento.prw: FIE_PEDIDO = C5_NUM
+    If !Empty(cNum)
+        lTemFIE := ( Select("FIE") > 0 )
+        If !lTemFIE
+            lTemFIE := ChkFile("FIE")
+        EndIf
+        If lTemFIE
+            DbSelectArea("FIE")
+            FIE->(DbGoTop())
+            While FIE->(!Eof())
+                If AllTrim(FIE->FIE_PEDIDO) == AllTrim(cNum) .And. ;
+                   FIE->FIE_FILIAL == xFilial("FIE")
+                    nAdiant++
+                EndIf
+                FIE->(DbSkip())
+            End
+        EndIf
+    EndIf
+
+    cMsg := "PONTO: " + cPonto + CRLF + CRLF
+    cMsg += "Pedido: [" + AllTrim(cFil) + "/" + AllTrim(cNum) + "]" + CRLF
+    cMsg += "Cond. pagto: [" + AllTrim(cCond) + "]" + CRLF
+    cMsg += "Regra AKCRED bloquearia? " + ;
+            Iif(!Empty(cCond) .And. U_AKBLQCRED(cCond), "SIM", "nao") + CRLF
+    cMsg += "FIE acessivel: " + Iif(lTemFIE, "SIM", "NAO") + CRLF
+    cMsg += "Adiantamentos vinculados ao pedido: " + cValToChar(nAdiant)
+
+    ConOut("[AKCRED-SONDA4] " + StrTran(cMsg, CRLF, " | "))
+
+    If !IsBlind()
+        MsgInfo(cMsg, "Sonda - " + cPonto)
+    EndIf
+
+    RestArea(aArea)
+
+Return

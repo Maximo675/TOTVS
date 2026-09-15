@@ -1,0 +1,16 @@
+-- Condicoes de pagamento: quais estao bloqueadas para uso (REGBLOQ)
+-- e quais entram na regra AKCRED (E4_ZTPMOV='V' e E4_CTRADT='1' ou descricao CC)
+SELECT
+  E4_FILIAL,
+  E4_CODIGO,
+  E4_DESCRI,
+  E4_CTRADT,
+  E4_ZTPMOV,
+  E4_MSBLQL,
+  CASE WHEN E4_MSBLQL = '1' THEN 'BLOQUEADA' ELSE 'ok' END AS SITUACAO,
+  CASE WHEN E4_ZTPMOV = 'V'
+        AND ( E4_CTRADT = '1' OR UPPER(E4_DESCRI) LIKE '%CC%' )
+       THEN 'ENTRA NA REGRA' ELSE '-' END AS REGRA_AKCRED
+FROM SE4010
+WHERE D_E_L_E_T_ = ' '
+ORDER BY E4_FILIAL, E4_CODIGO

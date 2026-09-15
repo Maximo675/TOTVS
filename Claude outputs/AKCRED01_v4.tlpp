@@ -1,0 +1,404 @@
+#INCLUDE "totvs.ch"
+
+/* ---------------------------------------------------------------------------
+   Fonte....: AKCRED01.TLPP
+   Chamado..: Bloqueio obrigatorio de Analise de Credito para pedidos nas
+              condicoes VENDAS - CC (cartao parcelado) e VENDAS - *ANTECIPADO*
+              (PIX antecipado), independente da Classe/Limite de Credito do
+              cliente. Regra valida para todas as filiais.
+
+   Contexto.: o motor nativo de credito libera automaticamente pedidos com
+              prazo de recebimento praticamente zero, sem considerar a
+              Classe/Risco do cliente. Confirmado em producao: clientes de
+              classe A, B e E passam igual nessas condicoes.
+
+   ESTE FONTE NAO CRIA PONTO DE ENTRADA
+   ------------------------------------
+   MT410INC e MT410ALT ja existem em Faturamento/Obs_Ajusta_Volumes.prw.
+   Para ativar a regra, acrescentar a chamada nos PEs existentes:
+
+       User Function MT410INC()
+           SincC5Obs()
+           U_ZAUDC5A(.T.)
+           U_AKCREDPV()        // <-- acrescentar
+       Return Nil
+
+       User Function MT410ALT()
+           SincC5Obs()
+           U_ZAUDC5A(.F.)
+           U_AKCREDPV()        // <-- acrescentar
+       Return Nil
+
+   NAO usar #DEFINE neste fonte - mesmo motivo documentado no
+   Obs_Ajusta_Volumes.prw (preprocessador nao aplicado neste ambiente).
+   Constantes implementadas como funcao.
+--------------------------------------------------------------------------- */
+
+
+// Codigo gravado em C9_BLCRED. CONFERIR o codigo de bloqueio manual do ambiente.
+Static Function AkCodBloq()
+Return "05"
+
+Static Function AkCredLog()         // log no console
+Return .T.
+
+Static Function AkCredArq()         // log em arquivo (pasta no rootpath do server)
+Return .T.
+
+Static Function AkCredDir()
+Return "\akiyama_log"
+
+Static Function AkCredAviso()       // avisa o usuario na tela ao bloquear
+Return .T.
+
+// Modo diagnostico: mostra na tela o que a regra leu e decidiu, MESMO quando
+// nao bloqueia. Serve para depurar durante os testes, sem depender do console
+// do servidor. DESLIGAR (.F.) antes de subir para producao.
+Static Function AkCredDebug()
+Return .T.
+
+
+//----------------------------------------------------------------------------
+// U_AKCREDPV
+// Ponto unico da regra. Assume SC5 posicionado (caso de MT410INC/MT410ALT).
+//----------------------------------------------------------------------------
+User Function AKCREDPV()
+
+    Local cFil    := ""
+    Local cNum    := ""
+    Local cCond   := ""
+    Local cDescri := ""
+    Local lRegra  := .F.
+    Local nBloq   := 0
+
+    If Select("SC5") == 0 .Or. Empty(SC5->C5_NUM)
+        Return Nil
+    EndIf
+
+    cFil  := SC5->C5_FILIAL
+    cNum  := SC5->C5_NUM
+    cCond := SC5->C5_CONDPAG
+
+    // ATENCAO - nao passar C5_FILIAL para a busca na SE4.
+    // SC5 e' exclusiva por filial completa (ex.: 1001001) e a SE4 esta
+    // compartilhada num nivel acima (ex.: 1001). Quem resolve isso e'
+    // o xFilial("SE4"), usado como default dentro de U_AKBLQCRED.
+    lRegra  := U_AKBLQCRED(cCond)
+    cDescri := AkDescCond(cCond)
+
+    If AkCredDebug()
+        AkCredDbg(cFil, cNum, cCond, cDescri, lRegra)
+    EndIf
+
+    If !lRegra
+        Return Nil
+    EndIf
+
+    nBloq := U_AKFORCABLQ(cFil, cNum)
+
+    // Sem item bloqueado agora (ex.: pedido ja estava retido) -> nao repete aviso
+    If nBloq <= 0
+        Return Nil
+    EndIf
+
+    AkCredReg(cFil, cNum, cCond, cDescri, nBloq)
+    AkCredMsg(cNum, cCond, cDescri)
+
+Return Nil
+
+
+//----------------------------------------------------------------------------
+// AkCredDbg
+// Diagnostico de teste: mostra os valores que a regra leu e a decisao tomada.
+// Aparece mesmo quando NAO bloqueia - e' o que permite ver se a busca na SE4
+// encontrou a condicao. Controlado por AkCredDebug(); desligar em producao.
+//----------------------------------------------------------------------------
+Static Function AkCredDbg(cFil, cNum, cCond, cDescri, lRegra)
+
+    Local cMsg  := ""
+    Local lAuto := .F.
+
+    If Type("lMsHelpAuto") == "L"
+        lAuto := lMsHelpAuto
+    EndIf
+
+    cMsg := "[AKCRED-DEBUG]" + CRLF
+    cMsg += "Filial do pedido (C5_FILIAL): [" + cFil + "]" + CRLF
+    cMsg += "Filial usada na SE4 (xFilial): [" + xFilial("SE4") + "]" + CRLF
+    cMsg += "Pedido: [" + cNum + "]" + CRLF
+    cMsg += "Cond. pagto (C5_CONDPAG): [" + cCond + "]" + CRLF
+    cMsg += "Descricao encontrada na SE4: [" + cDescri + "]" + CRLF
+    cMsg += "Decisao da regra: " + Iif(lRegra, "BLOQUEIA", "nao bloqueia")
+
+    ConOut(StrTran(cMsg, CRLF, " | "))
+
+    If !IsBlind() .And. !lAuto
+        MsgInfo(cMsg, "AKCRED - diagnostico")
+    EndIf
+
+Return
+
+
+//----------------------------------------------------------------------------
+// AkCredMsg
+// Aviso ao usuario. So aparece quando ha alguem na frente da tela:
+//   IsBlind()    -> processo sem interface (job, schedule)
+//   lMsHelpAuto  -> rotina automatica (MsExecAuto), caso das integracoes
+// Nos dois casos o aviso e' suprimido, para nao travar processo automatico.
+//----------------------------------------------------------------------------
+Static Function AkCredMsg(cNum, cCond, cDescri)
+
+    Local cMsg  := ""
+    Local lAuto := .F.
+
+    If !AkCredAviso()
+        Return
+    EndIf
+
+    If Type("lMsHelpAuto") == "L"
+        lAuto := lMsHelpAuto
+    EndIf
+
+    If IsBlind() .Or. lAuto
+        Return
+    EndIf
+
+    cMsg := "Pedido " + AllTrim(cNum) + " retido para Analise de Credito." + CRLF + CRLF
+    cMsg += "Condicao de pagamento: " + AllTrim(cCond) + " - " + AllTrim(cDescri) + CRLF + CRLF
+    cMsg += "Vendas em cartao de credito e antecipado (PIX) so podem ser faturadas "
+    cMsg += "apos a confirmacao do pagamento pelo Financeiro." + CRLF + CRLF
+    cMsg += "A liberacao e' feita pelo Financeiro na rotina de Analise de Credito. "
+    cMsg += "Nao e' necessario abrir chamado: o pedido ja esta na fila."
+
+    MsgInfo(cMsg, "Analise de Credito obrigatoria")
+
+Return
+
+
+//----------------------------------------------------------------------------
+// AkCredReg
+// Registro do motivo do bloqueio.
+//
+// ATENCAO - por que NAO gravamos em C5_XOBS / C5_MENNOTA:
+// esses campos alimentam a mensagem impressa na NOTA FISCAL do cliente
+// (ver Obs_Ajusta_Volumes.prw). Escrever "bloqueado por credito" neles
+// mandaria o motivo do bloqueio para o documento fiscal do cliente.
+//
+// Se o Financeiro quiser o motivo visivel na tela do pedido, o caminho
+// correto e' criar um campo customizado proprio (ex.: C5_XMOTBLQ) no
+// dicionario e gravar nele - trecho deixado comentado abaixo.
+//----------------------------------------------------------------------------
+Static Function AkCredReg(cFil, cNum, cCond, cDescri, nBloq)
+
+    Local cLinha := ""
+    Local cArq   := ""
+    Local cAnt   := ""
+
+    cLinha := DToC(Date()) + " " + Time() + " | " + ;
+              "Filial " + AllTrim(cFil) + " | Pedido " + AllTrim(cNum) + " | " + ;
+              "Cond " + AllTrim(cCond) + " - " + AllTrim(cDescri) + " | " + ;
+              "Itens bloqueados: " + cValToChar(nBloq) + " | " + ;
+              "Usuario: " + AllTrim(cUserName)
+
+    If AkCredLog()
+        ConOut("[AKCRED] " + cLinha)
+    EndIf
+
+    If AkCredArq()
+        If !ExistDir(AkCredDir())
+            MakeDir(AkCredDir())
+        EndIf
+        cArq := AkCredDir() + "\akcred_" + DToS(Date()) + ".log"
+        If File(cArq)
+            cAnt := MemoRead(cArq)
+        EndIf
+        MemoWrite(cArq, cAnt + cLinha + CRLF)
+    EndIf
+
+    // Opcional - motivo visivel na tela do pedido. Exige criar C5_XMOTBLQ
+    // no dicionario antes de habilitar.
+    /*
+    If SC5->(FieldPos("C5_XMOTBLQ")) > 0
+        RecLock("SC5", .F.)
+        SC5->C5_XMOTBLQ := "Retido: cond. pagto exige confirmacao de pagamento"
+        MsUnLock()
+    EndIf
+    */
+
+Return
+
+
+//----------------------------------------------------------------------------
+// AkDescCond - descricao da condicao de pagamento, para as mensagens
+//----------------------------------------------------------------------------
+Static Function AkDescCond(cCondPag, cFilCond)
+
+    Local cDescri  := ""
+    Local aAreaSE4 := Nil
+
+    Default cCondPag := ""
+    Default cFilCond := xFilial("SE4")
+
+    If Empty(cCondPag) .Or. Select("SE4") == 0
+        Return ""
+    EndIf
+
+    aAreaSE4 := SE4->(GetArea())
+    SE4->(DbSetOrder(1))
+    If SE4->(DbSeek(cFilCond + cCondPag))
+        cDescri := AllTrim(SE4->E4_DESCRI)
+    EndIf
+    SE4->(RestArea(aAreaSE4))
+
+Return cDescri
+
+
+//----------------------------------------------------------------------------
+// U_AKBLQCRED
+// Retorna .T. se a condicao deve SEMPRE ir para Analise de Credito.
+//
+// Criterio (mesmo padrao de PV_SemAdiantamento.prw):
+//   E4_ZTPMOV = "V"  -> condicao de VENDA (customizado da casa)
+//   E4_CTRADT = "1"  -> ADIANTAMENTO (nativo). Cobre a familia antecipado/PIX,
+//                       inclusive variacoes escritas como "ANT" abreviado.
+//   descricao "VENDAS - CC" -> cartao parcelado. Validado na SE4: as condicoes
+//                       de cartao NAO tem E4_CTRADT = "1", entao este teste
+//                       por descricao e' necessario. Consequencia: condicao
+//                       de cartao criada fora desse padrao de nome nao sera
+//                       pega - a nomenclatura precisa ser mantida.
+//----------------------------------------------------------------------------
+User Function AKBLQCRED(cCondPag, cFilCond)
+
+    Local lBloqueia := .F.
+    Local lTpMovOk  := .T.
+    Local cDescri   := ""
+    Local aAreaSE4  := Nil
+
+    Default cCondPag := ""
+    Default cFilCond := xFilial("SE4")
+
+    If Empty(cCondPag) .Or. Select("SE4") == 0
+        Return .F.
+    EndIf
+
+    aAreaSE4 := SE4->(GetArea())
+
+    SE4->(DbSetOrder(1))            // E4_FILIAL + E4_CODIGO
+    If SE4->(DbSeek(cFilCond + cCondPag))
+
+        cDescri := Upper(AllTrim(SE4->E4_DESCRI))
+
+        If SE4->(FieldPos("E4_ZTPMOV")) > 0
+            lTpMovOk := ( AllTrim(SE4->E4_ZTPMOV) == "V" )
+        EndIf
+
+        If lTpMovOk
+            If SE4->(FieldPos("E4_CTRADT")) > 0 .And. AllTrim(SE4->E4_CTRADT) == "1"
+                lBloqueia := .T.
+            EndIf
+            If !lBloqueia .And. "VENDAS - CC" $ cDescri
+                lBloqueia := .T.
+            EndIf
+        EndIf
+
+    EndIf
+
+    SE4->(RestArea(aAreaSE4))
+
+Return lBloqueia
+
+
+//----------------------------------------------------------------------------
+// U_AKFORCABLQ
+// Grava o bloqueio nos itens do pedido. Retorna quantos foram bloqueados.
+//----------------------------------------------------------------------------
+User Function AKFORCABLQ(cFilPed, cNumPed)
+
+    Local nBloqueados := 0
+    Local aAreaSC9    := Nil
+
+    Default cFilPed := ""
+    Default cNumPed := ""
+
+    If Empty(cNumPed) .Or. Select("SC9") == 0
+        Return 0
+    EndIf
+
+    aAreaSC9 := SC9->(GetArea())
+
+    // Mesma logica de compartilhamento: a chave da SC9 vem de xFilial("SC9"),
+    // nao do C5_FILIAL cru.
+    cFilPed := xFilial("SC9")
+
+    SC9->(DbSetOrder(1))            // CONFERIR: C9_FILIAL + C9_PEDIDO + C9_ITEM
+    If SC9->(DbSeek(cFilPed + cNumPed))
+        While SC9->(!Eof()) .And. SC9->C9_FILIAL == cFilPed .And. SC9->C9_PEDIDO == cNumPed
+            If Empty(SC9->C9_BLCRED)
+                RecLock("SC9", .F.)
+                SC9->C9_BLCRED := AkCodBloq()
+                MsUnLock()
+                nBloqueados++
+            EndIf
+            SC9->(DbSkip())
+        End
+    Else
+        If AkCredLog()
+            ConOut("[AKCRED] SC9 sem registro para o pedido " + ;
+                   AllTrim(cFilPed) + "/" + AllTrim(cNumPed))
+        EndIf
+    EndIf
+
+    SC9->(RestArea(aAreaSC9))
+
+Return nBloqueados
+
+
+//----------------------------------------------------------------------------
+// U_AKCREDTST
+// Teste da regra, SOMENTE LEITURA. Lista as condicoes da filial corrente que
+// seriam marcadas para bloqueio. Nao altera nada.
+//----------------------------------------------------------------------------
+User Function AKCREDTST()
+
+    Local cFil     := xFilial("SE4")
+    Local nTotal   := 0
+    Local nBloq    := 0
+    Local cResumo  := ""
+    Local aAreaSE4 := Nil
+
+    If Select("SE4") == 0
+        ConOut("[AKCRED] SE4 nao esta aberta neste ambiente.")
+        Return Nil
+    EndIf
+
+    aAreaSE4 := SE4->(GetArea())
+
+    ConOut("[AKCRED] ---- Teste da regra | filial " + cFil + " ----")
+
+    SE4->(DbSetOrder(1))
+    SE4->(DbGoTop())
+    SE4->(DbSeek(cFil))
+
+    While SE4->(!Eof()) .And. SE4->E4_FILIAL == cFil
+        nTotal++
+        If U_AKBLQCRED(SE4->E4_CODIGO, SE4->E4_FILIAL)
+            nBloq++
+            ConOut("[AKCRED] BLOQUEIA -> cod " + AllTrim(SE4->E4_CODIGO) + ;
+                   " | " + AllTrim(SE4->E4_DESCRI))
+        EndIf
+        SE4->(DbSkip())
+    End
+
+    cResumo := "[AKCRED] Filial " + cFil + " | condicoes lidas: " + cValToChar(nTotal) + ;
+               " | marcadas para bloqueio: " + cValToChar(nBloq)
+    ConOut(cResumo)
+
+    If !IsBlind()
+        MsgInfo(cResumo + CRLF + CRLF + ;
+                "O detalhe de cada condicao esta no console do servidor.", ;
+                "AKCRED - Teste da regra")
+    EndIf
+
+    SE4->(RestArea(aAreaSE4))
+
+Return Nil

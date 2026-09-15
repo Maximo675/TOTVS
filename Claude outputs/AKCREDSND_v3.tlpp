@@ -1,0 +1,84 @@
+#INCLUDE "totvs.ch"
+
+/* ---------------------------------------------------------------------------
+   Fonte....: AKCREDSND.TLPP  (SONDA v3 - TEMPORARIO, so ambiente de DEV)
+
+   Objetivo: numa unica liberacao de pedido, descobrir QUAIS pontos de entrada
+   disparam, em QUE ORDEM, e em qual deles a SC9 do pedido JA EXISTE gravada.
+   O primeiro ponto que mostrar "registros > 0" e' onde a nossa regra deve
+   carimbar.
+
+   Descoberto na v1/v2: MT440GR roda ANTES da gravacao da SC9.
+   Agora sondamos tambem os pontos da rotina de analise de credito.
+
+   Todos retornam .T. (valor permissivo) e NAO alteram nada.
+   Apagar do RPO depois do teste.
+--------------------------------------------------------------------------- */
+
+User Function MT440GR()
+    AkSnd("MT440GR - apos confirmar liberacao manual")
+Return .T.
+
+User Function MTA450T()
+    AkSnd("MTA450T - atualizacao de SC9 na liberacao")
+Return .T.
+
+User Function MT450FIM()
+    AkSnd("MT450FIM - final da liberacao do pedido")
+Return .T.
+
+
+//----------------------------------------------------------------------------
+// AkSnd - mostra o estado da SC9 no momento em que o ponto disparou
+//----------------------------------------------------------------------------
+Static Function AkSnd(cPonto)
+
+    Local cNum    := ""
+    Local cCond   := ""
+    Local cMsg    := ""
+    Local cDetal  := ""
+    Local lJaTava := .F.
+    Local lAbriu  := .F.
+    Local nQtd    := 0
+    Local aArea   := GetArea()
+
+    If Select("SC5") > 0 .And. !Empty(SC5->C5_NUM)
+        cNum  := SC5->C5_NUM
+        cCond := SC5->C5_CONDPAG
+    ElseIf Select("SC9") > 0 .And. !Empty(SC9->C9_PEDIDO)
+        cNum := SC9->C9_PEDIDO
+    EndIf
+
+    lJaTava := ( Select("SC9") > 0 )
+    If !lJaTava
+        lAbriu := ChkFile("SC9")
+    EndIf
+
+    If ( lJaTava .Or. lAbriu ) .And. !Empty(cNum)
+        DbSelectArea("SC9")
+        SC9->(DbSetOrder(1))
+        If SC9->(DbSeek(xFilial("SC9") + cNum))
+            While SC9->(!Eof()) .And. SC9->C9_FILIAL == xFilial("SC9") ;
+                  .And. SC9->C9_PEDIDO == cNum
+                nQtd++
+                cDetal += AllTrim(SC9->C9_ITEM) + ":[" + AllTrim(SC9->C9_BLCRED) + "] "
+                SC9->(DbSkip())
+            End
+        EndIf
+    EndIf
+
+    cMsg := "PONTO: " + cPonto + CRLF + CRLF
+    cMsg += "Pedido: [" + AllTrim(cNum) + "]  Cond: [" + AllTrim(cCond) + "]" + CRLF
+    cMsg += "SC9 ja aberta: " + Iif(lJaTava, "SIM", Iif(lAbriu, "nao - ChkFile abriu", "nao - ChkFile falhou")) + CRLF
+    cMsg += "Registros da SC9 AGORA: " + cValToChar(nQtd) + CRLF
+    cMsg += "Itens/blcred: " + Iif(Empty(cDetal), "(nenhum)", cDetal)
+
+    ConOut("[AKCRED-SONDA] " + StrTran(cMsg, CRLF, " | "))
+
+    If !IsBlind()
+        MsgInfo(cMsg, "Sonda - " + cPonto)
+    EndIf
+
+    RestArea(aArea)
+
+Return

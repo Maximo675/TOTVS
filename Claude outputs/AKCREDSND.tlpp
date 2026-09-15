@@ -1,0 +1,81 @@
+#INCLUDE "totvs.ch"
+
+/* ---------------------------------------------------------------------------
+   Fonte....: AKCREDSND.TLPP   (SONDA - TEMPORARIO, so ambiente de DEV)
+   Objetivo.: descobrir empiricamente, na rotina de Liberacao de Pedidos de
+              Venda (MATA440), qual ponto de entrada dispara e se a SC9 do
+              pedido ja existe naquele momento.
+
+   NAO altera nada. So escreve no console e mostra uma tela.
+   Apagar/descompilar depois de descoberto o ponto certo.
+
+   Ponto sondado: MT440GR - "Apos confirmar a Liberacao Manual".
+   Retorna .T. por ser o valor permissivo: se o PE ignora o retorno, nao faz
+   diferenca; se espera logico, .T. mantem o fluxo normal.
+--------------------------------------------------------------------------- */
+
+User Function MT440GR()
+    AkSndLog("MT440GR")
+Return .T.
+
+
+//----------------------------------------------------------------------------
+// AkSndLog - registra o que esta disponivel no momento do ponto de entrada
+//----------------------------------------------------------------------------
+Static Function AkSndLog(cPonto)
+
+    Local cFil   := ""
+    Local cNum   := ""
+    Local cCond  := ""
+    Local cMsg   := ""
+    Local lTemC5 := .F.
+    Local lTemC6 := .F.
+    Local lTemC9 := .F.
+    Local nQtdC9 := 0
+    Local aArea  := GetArea()
+
+    lTemC5 := ( Select("SC5") > 0 )
+    lTemC6 := ( Select("SC6") > 0 )
+    lTemC9 := ( Select("SC9") > 0 )
+
+    If lTemC5 .And. !Empty(SC5->C5_NUM)
+        cFil  := SC5->C5_FILIAL
+        cNum  := SC5->C5_NUM
+        cCond := SC5->C5_CONDPAG
+    ElseIf lTemC9 .And. !Empty(SC9->C9_PEDIDO)
+        // se SC5 nao estiver posicionada, tenta pela propria SC9
+        cFil  := SC9->C9_FILIAL
+        cNum  := SC9->C9_PEDIDO
+    EndIf
+
+    // Conta quantos registros de liberacao ja existem para este pedido
+    If lTemC9 .And. !Empty(cNum)
+        DbSelectArea("SC9")
+        SC9->(DbSetOrder(1))
+        If SC9->(DbSeek(xFilial("SC9") + cNum))
+            While SC9->(!Eof()) .And. SC9->C9_FILIAL == xFilial("SC9") ;
+                  .And. SC9->C9_PEDIDO == cNum
+                nQtdC9++
+                SC9->(DbSkip())
+            End
+        EndIf
+    EndIf
+
+    cMsg := "[AKCRED-SONDA-440]" + CRLF
+    cMsg += "Ponto de entrada: " + cPonto + CRLF
+    cMsg += "SC5 aberta: " + Iif(lTemC5, "SIM", "NAO") + CRLF
+    cMsg += "SC6 aberta: " + Iif(lTemC6, "SIM", "NAO") + CRLF
+    cMsg += "SC9 aberta: " + Iif(lTemC9, "SIM", "NAO") + CRLF
+    cMsg += "Pedido identificado: [" + AllTrim(cFil) + "/" + AllTrim(cNum) + "]" + CRLF
+    cMsg += "Cond. pagto: [" + AllTrim(cCond) + "]" + CRLF
+    cMsg += "Registros na SC9 deste pedido AGORA: " + cValToChar(nQtdC9)
+
+    ConOut(StrTran(cMsg, CRLF, " | "))
+
+    If !IsBlind()
+        MsgInfo(cMsg, "AKCRED - sonda MATA440")
+    EndIf
+
+    RestArea(aArea)
+
+Return

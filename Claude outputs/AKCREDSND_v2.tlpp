@@ -1,0 +1,79 @@
+#INCLUDE "totvs.ch"
+
+/* ---------------------------------------------------------------------------
+   Fonte....: AKCREDSND.TLPP  (SONDA v2 - TEMPORARIO, so ambiente de DEV)
+
+   Diferenca para a v1: usa ChkFile("SC9") para ABRIR a tabela quando ela nao
+   estiver disponivel no contexto, em vez de desistir. Na v1 o resultado
+   "SC9 aberta: NAO" deixou a contagem inconclusiva - nao sabiamos se os
+   registros nao existiam ou se so nao estavam acessiveis.
+
+   Continua sem alterar nada: so le, conta e mostra.
+--------------------------------------------------------------------------- */
+
+User Function MT440GR()
+    AkSndLog("MT440GR")
+Return .T.
+
+
+Static Function AkSndLog(cPonto)
+
+    Local cFil    := ""
+    Local cNum    := ""
+    Local cCond   := ""
+    Local cMsg    := ""
+    Local cDetal  := ""
+    Local lTemC5  := .F.
+    Local lAbriu  := .F.
+    Local lJaTava := .F.
+    Local nQtdC9  := 0
+    Local aArea   := GetArea()
+
+    lTemC5 := ( Select("SC5") > 0 )
+
+    If lTemC5 .And. !Empty(SC5->C5_NUM)
+        cFil  := SC5->C5_FILIAL
+        cNum  := SC5->C5_NUM
+        cCond := SC5->C5_CONDPAG
+    EndIf
+
+    lJaTava := ( Select("SC9") > 0 )
+
+    // Abre a SC9 se ela nao estiver no contexto
+    If !lJaTava
+        lAbriu := ChkFile("SC9")
+    EndIf
+
+    If ( lJaTava .Or. lAbriu ) .And. !Empty(cNum)
+        DbSelectArea("SC9")
+        SC9->(DbSetOrder(1))
+        If SC9->(DbSeek(xFilial("SC9") + cNum))
+            While SC9->(!Eof()) .And. SC9->C9_FILIAL == xFilial("SC9") ;
+                  .And. SC9->C9_PEDIDO == cNum
+                nQtdC9++
+                cDetal += "item " + AllTrim(SC9->C9_ITEM) + ;
+                          " blcred=[" + AllTrim(SC9->C9_BLCRED) + "]" + ;
+                          " blest=[" + AllTrim(SC9->C9_BLEST) + "]; "
+                SC9->(DbSkip())
+            End
+        EndIf
+    EndIf
+
+    cMsg := "[AKCRED-SONDA-440 v2]" + CRLF
+    cMsg += "Ponto de entrada: " + cPonto + CRLF
+    cMsg += "Pedido: [" + AllTrim(cFil) + "/" + AllTrim(cNum) + "]" + CRLF
+    cMsg += "Cond. pagto: [" + AllTrim(cCond) + "]" + CRLF
+    cMsg += "SC9 ja estava aberta: " + Iif(lJaTava, "SIM", "NAO") + CRLF
+    cMsg += "ChkFile conseguiu abrir: " + Iif(lJaTava, "(nao precisou)", Iif(lAbriu, "SIM", "NAO")) + CRLF
+    cMsg += "Registros na SC9 deste pedido AGORA: " + cValToChar(nQtdC9) + CRLF
+    cMsg += Iif(Empty(cDetal), "(nenhum item)", cDetal)
+
+    ConOut(StrTran(cMsg, CRLF, " | "))
+
+    If !IsBlind()
+        MsgInfo(cMsg, "AKCRED - sonda MATA440 v2")
+    EndIf
+
+    RestArea(aArea)
+
+Return
