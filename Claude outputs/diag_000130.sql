@@ -1,0 +1,20 @@
+-- Pedido 000130 (filial 1001001): o que a SC9 e a SC5 dizem dele.
+-- Responde: o credito ainda esta bloqueado, ou so' sobrou o estoque?
+SELECT
+  C9.C9_ITEM     AS ITEM,
+  C9.C9_PRODUTO  AS PRODUTO,
+  C9.C9_QTDLIB   AS QTDLIB,
+  C9.C9_BLCRED   AS BLCRED,
+  C9.C9_BLEST    AS BLEST,
+  C5.C5_CONDPAG  AS COND,
+  C5.C5_LIBEROK  AS LIBEROK,
+  C5.C5_BLQ      AS BLQ
+FROM SC5010 C5
+INNER JOIN SC9010 C9
+        ON C9.C9_FILIAL = C5.C5_FILIAL
+       AND C9.C9_PEDIDO = C5.C5_NUM
+       AND C9.D_E_L_E_T_ = ' '
+WHERE C5.C5_NUM = '000130'
+  AND TRIM(C5.C5_FILIAL) = '1001001'
+  AND C5.D_E_L_E_T_ = ' '
+ORDER BY C9.C9_ITEM

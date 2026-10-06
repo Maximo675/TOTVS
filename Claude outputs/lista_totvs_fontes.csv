@@ -1,0 +1,382 @@
+Modulo_Chamado,Fonte,Descricao,Modulo_TDN_original,EmEscopo
+Ativo Fixo,atfr110,Aquisições,Ativo Fixo,1
+Ativo Fixo,atfr070,Posicao Valorizada dos Bens por Conta,Ativo Fixo,1
+Ativo Fixo,atfr010,Cadastro de Ativos,Ativo Fixo,1
+Ativo Fixo,atfr120,Baixas,Ativo Fixo,1
+Ativo Fixo,atfr080,Resumo Por Conta Atualizado,Ativo Fixo,1
+Ativo Fixo,atfr150,Movimentos,Ativo Fixo,1
+Ativo Fixo,atfr130,Razão Auxiliar,Ativo Fixo,1
+Ativo Fixo,atfr030,Ficha do Ativo,Ativo Fixo,1
+Ativo Fixo,atfr072,Posição Valorizada Por Conta Na Data,Ativo Fixo,1
+Ativo Fixo,atfr100,Transferências,Ativo Fixo,1
+Ativo Fixo,atfr033,Demonstrativo do Ativo Fixo,Ativo Fixo,1
+Ativo Fixo,atfr210,Inventário,Ativo Fixo,1
+Ativo Fixo,atfr180,Bens Depreciados,Ativo Fixo,1
+Ativo Fixo,atfr073,Posição de 12 Meses,Ativo Fixo,1
+Ativo Fixo,atfr190,Lançamentos Por Centro Custo,Ativo Fixo,1
+Ativo Fixo,atfr260,Ampliações,Ativo Fixo,1
+Ativo Fixo,atfr090,Adiantamentos,Ativo Fixo,1
+Ativo Fixo,atfr200,Bens Depreciados Por %,Ativo Fixo,1
+Ativo Fixo,atfr270,Lançamentos Por Item Contábil,Ativo Fixo,1
+Ativo Fixo,atfr320,Responsáveis x Bens,Ativo Fixo,1
+Ativo Fixo,atfr432,Project Depreciation Statement,Ativo Fixo,1
+Ativo Fixo,atfr350,Simulação de Depreciação,Ativo Fixo,1
+Ativo Fixo,atfr250,Acquisition By Transfer,Ativo Fixo,1
+Ativo Fixo,atfr074,Rateio de Despesa Por Ativo,Ativo Fixo,1
+Ativo Fixo,atfr170,Correção Monetária,Ativo Fixo,1
+Contabilidade Gerencial,ctbr550,Fluxo de Contas,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr320,Centro de Custo X Classe de Valor,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr255,Cc X 6 Filiais,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr220,Itens X Classe de Valores,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr116,Diário Gerencial,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr650,Relatorio do Cadastro de Historico,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr049,Plano Referencial,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr390,Orçamentos,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr360,Var.sld X Cc X Cta,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr045,Conversão Moedas,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr590,Mult.vis.gerencial,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr085,Relatório Sublote e Documento Fiscal,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr230,Classe de Valor X Itens,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr340,Classe de Valor X Centro de Custo,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr610,Dem Ger Detalhado,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr165,Entidade Gerencial,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr700,Dem. Gerenc.mod 2,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr815,Balanço Patr. (birt),Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr395,Comparativo Orçamentário,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr270,Cc X Item X 6meses,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr076,Histórico Alteração,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr520,Origens/aplic.rec.,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr817,Fluxo de Caixa (birt),Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr301,Modelo 1 Em 2 Mdas,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr750,Movimentos de Apuração Contábil de Contrato,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr240,2 Entidades Filtradas Pela 3a,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr370,Tpsld X 1 Ent Cust,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr816,Análise Vertical (birt),Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr015,Tipificação,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr303,Item Cont. 2 Mdas,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr119,Diário Plano Referencial,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr304,Cl. Valor Em 2 Mdas,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr290,Item X 6 Cc,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr300,Item X 6 Cl.valor,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr541,Analise Vert.mod 2,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr570,Dem. Valor Adic.,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr310,Cl.vlr X It X 6mes,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr302,C.custo Em 2 Mdas,Contabilidade Gerencial,1
+Contabilidade Gerencial,ctbr818,Org/aplic. Rec (birt),Contabilidade Gerencial,1
+Orçamento,pcor550,Demonstrativo Saldo Mensal,Planejamento e Controle Orçamentário,1
+Orçamento,pcor055,Estrutura Completa,Planejamento e Controle Orçamentário,1
+Orçamento,pcor002,Classes,Planejamento e Controle Orçamentário,1
+Orçamento,pcor350,Balancete Parcial,Planejamento e Controle Orçamentário,1
+Orçamento,pcor530,Demonstrativo Por Período Resumido,Planejamento e Controle Orçamentário,1
+Orçamento,pcor340,Demonstrativo Saldos,Planejamento e Controle Orçamentário,1
+Orçamento,pcor211,Comparação Versões,Planejamento e Controle Orçamentário,1
+Orçamento,pcor030,Estrutura Resumida,Planejamento e Controle Orçamentário,1
+Orçamento,pcor060,Totalizadores,Planejamento e Controle Orçamentário,1
+Orçamento,pcor200,Simulação Estatística,Planejamento e Controle Orçamentário,1
+Financeiro,FINR490,Cópia de Cheques,Financeiro,1
+Financeiro,FINR480,Impressão de Cheques,Financeiro,1
+Financeiro,FINR460,Impressão de Cheques,Financeiro,1
+Financeiro,FINR600,Boleto Genérico,Financeiro,1
+Financeiro,FINR020,Livro de duplicatas,Financeiro,1
+Financeiro,FINR585,Liberação de documentos,Financeiro,1
+Financeiro,FINR820,Histórico das aplicações,Financeiro,1
+Financeiro,FINR355,Impostos por fornecedor,Financeiro,1
+Financeiro,FINR870,Histórico dos empréstimos,Financeiro,1
+Financeiro,FINR195,Mapa de Rateio,Financeiro,1
+Financeiro,FINR740,Boleto Rdmake,Financeiro,1
+Financeiro,FINR580,Fechamento do Caixinha,Financeiro,1
+Financeiro,FINR590,Mapa Múltiplas Naturezas / CC,Financeiro,1
+Financeiro,FINR750,Eficiência do Contas Receber,Financeiro,1
+Financeiro,FINR720,Orçado x Realizado Reais Mensal,Financeiro,1
+Financeiro,FINR450,Sugestão de bloqueio,Financeiro,1
+Financeiro,FINR830,Movimentos da Aplicação,Financeiro,1
+Financeiro,FINR460a,Acordos de Liquidação,Financeiro,1
+Financeiro,FINR290,Juros devidos e não pagos,Financeiro,1
+Financeiro,FINR665,Mapa de Viagens,Financeiro,1
+Financeiro,FINR721,Orçado x Realizado Reais Mensal CC,Financeiro,1
+Financeiro,FINR677,Prestação de contas,Financeiro,1
+Financeiro,FINR731,Orçado x Realizado Reais Ano CC,Financeiro,1
+Financeiro,FINR730,Orçado x Realizado Reais Ano,Financeiro,1
+Financeiro,FINR775,Histórico de Movimentos Serasa,Financeiro,1
+Financeiro,FINR678,Status Prestação de Contas,Financeiro,1
+Financeiro,FINR907,Títulos AVP - CP,Financeiro,1
+Financeiro,FINR905,Títulos AVP - CR,Financeiro,1
+Financeiro,FINR694,Conciliação de Viagem,Financeiro,1
+Financeiro,FINR906,Conferencia AVP - CP,Financeiro,1
+Financeiro,FINR405,Repasse IR PJ,Financeiro,1
+Financeiro,FINR904,Conferencia AVP - CR,Financeiro,1
+Financeiro,FINR915,Minha Casa Minha Vida,Financeiro,1
+Financeiro,FINRSRF,Impressão DARF,Financeiro,1
+Financeiro,FINR471,Conciliação,Financeiro,1
+Financeiro,FINR641,Conferencia rateio financeiro,Financeiro,1
+Financeiro,FINR321,Posição geral da Cobrança,Financeiro,1
+Financeiro,FINR132,Razonete,Financeiro,1
+Financeiro,FINRGPS,Guia para pagamento GPS,Financeiro,1
+Financeiro,FINR500,Liquidações Financeiro,Financeiro,1
+Financeiro,FINR501,Liquidações do Contas a Receber,Financeiro,1
+Financeiro,FINR502,Liquidações do Contas a Pagar,Financeiro,1
+Financeiro,FINR150,Posição Títulos a Pagar,Financeiro,1
+Financeiro,FINR470,Extrato Bancário,Financeiro,1
+Financeiro,FINR130,Posição Títulos a Receber,Financeiro,1
+Financeiro,FINR190,Relação de Baixas,Financeiro,1
+Financeiro,FINR620,Movimentação Bancária,Financeiro,1
+Financeiro,FINR350,Posição dos Fornecedores,Financeiro,1
+Financeiro,FINR530,Movimento Diário,Financeiro,1
+Financeiro,FINR650,Retorno Bancário Cnab,Financeiro,1
+Financeiro,FINR170,Relação de Borderôs,Financeiro,1
+Financeiro,FINR340,Posição de Clientes,Financeiro,1
+Financeiro,FINR710,Borderô de Pagamentos,Financeiro,1
+Financeiro,FINR865,Relação Títulos a Pagar c/Retenção,Financeiro,1
+Financeiro,FINR158,Títulos a Pagar por Natureza,Financeiro,1
+Financeiro,FINR198,Relação de Baixas Por Natureza,Financeiro,1
+Financeiro,FINR140,Fluxo de Caixa Analítico,Financeiro,1
+Financeiro,FINR120,Movimento Diário do Caixa,Financeiro,1
+Financeiro,FINR138,Títulos a Receber por Natureza,Financeiro,1
+Financeiro,FINR855,Relação Títulos x Impostos,Financeiro,1
+Financeiro,FINR560,Movimentos do Caixinha,Financeiro,1
+Financeiro,FINR137,Posição Títulos a Receber por Vendedor,Financeiro,1
+Financeiro,FINR330,Posição Geral do Contas a Pagar,Financeiro,1
+Financeiro,FINR010,Relação de Naturezas,Financeiro,1
+Financeiro,FINR270,Histórico de Clientes,Financeiro,1
+Financeiro,FINR610,Previsão de Comissões,Financeiro,1
+Financeiro,FINR899,Recibos por Cliente,Financeiro,1
+Financeiro,FINR840,Resumo Financeiro Sintético,Financeiro,1
+Financeiro,FINR320,Posição Geral da Cobrança,Financeiro,1
+Financeiro,FINR180,Relação de Baixas por Lote,Financeiro,1
+Financeiro,FINR400,Relação de Cheques Emitidos,Financeiro,1
+Financeiro,FINR770,Fluxo de Caixa Realizado,Financeiro,1
+Financeiro,FINR087,Recebimentos Diversos,Financeiro,1
+Financeiro,FINR660,Títulos Enviados ao Banco,Financeiro,1
+Financeiro,FINR520,Compensações Entre Carteiras,Financeiro,1
+Financeiro,FINR680,Extrato via CNAB,Financeiro,1
+Financeiro,FINR898,Recibos de Cobrança Emitidos,Financeiro,1
+Financeiro,FINR133,Aging contas a receber,Financeiro,1
+Financeiro,FINR940,Títulos com retenção de Impostos,Financeiro,1
+Financeiro,FINR280,Relação Juros Recebidos,Financeiro,1
+Financeiro,FINR801,Comparativo recebimentos últimos 6 meses,Financeiro,1
+Financeiro,FINR295,Relação de Faturas,Financeiro,1
+Financeiro,FINR570,Listagem Caixinha,Financeiro,1
+Financeiro,FINR300,Relação Maiores Devedores,Financeiro,1
+Financeiro,FINR760,Eficiência Contas Pagar,Financeiro,1
+Financeiro,FINR139,Títulos a receber por NF-e,Financeiro,1
+Financeiro,FINR860,Títulos a Receber com retenção INSS,Financeiro,1
+Financeiro,FINR895,"Demonstrativo Pis, Cofins e Csll",Financeiro,1
+Financeiro,FINR930,Relação títulos aglutinados,Financeiro,1
+Financeiro,FINR875,Títulos Retentores e Retidos,Financeiro,1
+Financeiro,FINR540,Cheques Cancelados,Financeiro,1
+Financeiro,FINR565,Recibo adiantamento do Caixinha,Financeiro,1
+Financeiro,FINR811,Carta de cobrança,Financeiro,1
+Financeiro,FINRPIX,Impressão do PIX,Financeiro,1
+Financeiro,FINR410,Cheque Recebido por Baixa,Financeiro,1
+Financeiro,FINR127,Quitação de Débitos,Financeiro,1
+Financeiro,MATR070,Bancos,Financeiro,1
+Estoque e Custos,MATR005,Log de Produtos,Estoque/Custos,1
+Estoque e Custos,MATR010,Produtos,Estoque/Custos,1
+Estoque e Custos,MATR036,Grupo de Produto,Estoque/Custos,1
+Estoque e Custos,MATR103,Relação de Notas de Transferência entre Filiais,Estoque/Custos,1
+Estoque e Custos,MATR105,Posição das Solicitações ao Armazém,Estoque/Custos,1
+Estoque e Custos,MATR107,Termo de Retirada,Estoque/Custos,1
+Estoque e Custos,MATR115,Controle de Entrega das Solicitações ao Armazém,Estoque/Custos,1
+Estoque e Custos,MATR175,Relação de Baixas do CQ,Estoque/Custos,1
+Estoque e Custos,MATR181,Relação do Complemento de produto,Estoque/Custos,1
+Estoque e Custos,MATR220,Saldos Iniciais,Estoque/Custos,1
+Estoque e Custos,MATR230,Requisições para Consumo,Estoque/Custos,1
+Estoque e Custos,MATR240,Posição de Estoque Sintético,Estoque/Custos,1
+Estoque e Custos,MATR242,Comparativo de custos,Estoque/Custos,1
+Estoque e Custos,MATR245,Produtos a Distribuir,Estoque/Custos,1
+Estoque e Custos,MATR255,Posição Detalhada do Estoque por Endereço,Estoque/Custos,1
+Estoque e Custos,MATR260,Posição de Estoque Analítico,Estoque/Custos,1
+Estoque e Custos,MATR265,Pick List Endereçamento,Estoque/Custos,1
+Estoque e Custos,MATR270,Etiquetas para Inventário,Estoque/Custos,1
+Estoque e Custos,MATR272,Lotes de Etiquetas para Inventário,Estoque/Custos,1
+Estoque e Custos,MATR275,Kardex por Endereço,Estoque/Custos,1
+Estoque e Custos,MATR280,Listagem para Inventário,Estoque/Custos,1
+Estoque e Custos,MATR282,Conferência de Saldos,Estoque/Custos,1
+Estoque e Custos,MATR285,Listagem dos Itens Inventariados,Estoque/Custos,1
+Estoque e Custos,MATR287,Divergência Multiplas Contagens,Estoque/Custos,1
+Estoque e Custos,MATR290,Relação para Análise dos Estoques,Estoque/Custos,1
+Estoque e Custos,MATR300,Relação das Movimentações Internas,Estoque/Custos,1
+Estoque e Custos,MATR310,Relação dos Produtos Vendidos,Estoque/Custos,1
+Estoque e Custos,MATR311,Relação dos Produtos Vendidos FIFO,Estoque/Custos,1
+Estoque e Custos,MATR320,Resumo de Entradas e Saídas,Estoque/Custos,1
+Estoque e Custos,MATR324,Transposição de Ativo x Estoque,Estoque/Custos,1
+Estoque e Custos,MATR330,Mapa das movimentações,Estoque/Custos,1
+Estoque e Custos,MATR331,Recursividade Por Movimentação,Estoque/Custos,1
+Estoque e Custos,MATR340,Consumo/Vendas Mes a Mes,Estoque/Custos,1
+Estoque e Custos,MATR350,Lista de Faltas,Estoque/Custos,1
+Estoque e Custos,MATR360,Diferença Apropriação Indireta,Estoque/Custos,1
+Estoque e Custos,MATR390,Diferenças de Estoque,Estoque/Custos,1
+Estoque e Custos,MATR410,Pick List,Estoque/Custos,1
+Estoque e Custos,MATR420,Resumo Diário do Kardex,Estoque/Custos,1
+Estoque e Custos,MATR430,Planilha de Formação de preços,Estoque/Custos,1
+Estoque e Custos,MATR425,Posição de Estoque por Lote/Sublote,Estoque/Custos,1
+Estoque e Custos,MATR435,Kardex por Lote/Sublote,Estoque/Custos,1
+Estoque e Custos,MATR445,Análise da movimentação de Estoque,Estoque/Custos,1
+Estoque e Custos,MATR450,Consumo Real x Standard,Estoque/Custos,1
+Estoque e Custos,MATR480,Relação de Materiais de/em Terceiros,Estoque/Custos,1
+Estoque e Custos,MATR485,Nfs de/em terceiros,Estoque/Custos,1
+Estoque e Custos,MATR520,Lista de Preços,Estoque/Custos,1
+Estoque e Custos,MATR551,Tabelas da grade de produtos,Estoque/Custos,1
+Estoque e Custos,MATR715,Transferência Entre Filiais,Estoque/Custos,1
+Estoque e Custos,MATR851,Relação por OP FIFO,Estoque/Custos,1
+Estoque e Custos,MATR870,Custo de Reposição dos Materiais,Estoque/Custos,1
+Estoque e Custos,MATR875,Relação para Análise de Estoques,Estoque/Custos,1
+Estoque e Custos,MATR900,Kardex,Estoque/Custos,1
+Estoque e Custos,MATR902,Kardex FIFO/LIFO,Estoque/Custos,1
+Estoque e Custos,MATR903,Problemas na baixa,Estoque/Custos,1
+Estoque e Custos,MATR910,Kardex por Dia,Estoque/Custos,1
+Estoque e Custos,MATR958,Unidades de Medida,Estoque/Custos,1
+Estoque e Custos,MATR960,Grade de Produto,Estoque/Custos,1
+Estoque e Custos,MATR989,Saldo em Processo (Analítico),Estoque/Custos,1
+CRM,crma420,Oportunidades,Customer Relationship Management,0
+CRM,crma450,Oportunidades X processos de venda,Customer Relationship Management,0
+CRM,fatr020,Relatorio de Processo de Venda,Customer Relationship Management,0
+CRM,fatr050,Relatório de Meta de Vendas,Customer Relationship Management,0
+Call Center,tmkr010,Cadastro de Contatos e entidades associadas,Call Center,1
+Call Center,tmkr018,Analise do Telemarketing Ativo pelo Tipo de Reclamacao,Call Center,1
+Call Center,tmkr038,Relacao de atendimentos no Telecobranca,Call Center,1
+Call Center,tmkr009,Relatorio do Cadastro de Operadores,Call Center,1
+Call Center,tmkr002,Ligacoes recebidas no atendimento de Telemarketing,Call Center,1
+Call Center,tmkr032,Relãcao dos vendedores,Call Center,1
+Call Center,tmkr001,Ligacoes realizadas no atendimento de Telemarketing,Call Center,1
+Call Center,tmkr016,Ligacoes realizadas no atendimento de Televendas,Call Center,1
+Call Center,tmkr037,Situacao dos titulos por cliente,Call Center,1
+Call Center,tmkr020,Relatorio Lista de Contatos,Call Center,1
+Call Center,tmkr033,Relacao de clientes por segmento de negocios,Call Center,1
+Call Center,tmkr004,Ranking de vendas por vendedores / Operadores,Call Center,1
+Call Center,tmkr050,Relatorio de ligações anotadas,Call Center,1
+Call Center,tmkr042,Ocorrencias de cobrancas,Call Center,1
+Call Center,tmkr025,Ligacoes realizadas no atendimento de Televendas,Call Center,1
+Call Center,tmkr030,Relacao de operadores por posto de vendas,Call Center,1
+Call Center,tmkr041,Cobrancas pendentes que estao na carteira de cobrancas de um operador,Call Center,1
+Call Center,tmkr017,Cobrancas pendentes que estao na carteira de cobrancas,Call Center,1
+Call Center,tmkr014,Cancelamentos da Rotina de Televendas,Call Center,1
+Call Center,tmkr031,Relatorio de Produtos por Grupo,Call Center,1
+Call Center,tmkr026,Relatorio de Metas - Gerencia de Campanhas,Call Center,1
+Call Center,tmkr019,Analise do Telemarketing pelo Tipo de Comunicacao,Call Center,1
+Call Center,tmkr022,Relacao de Ligacoes encerradas pelo tipo de comunicacao,Call Center,1
+Call Center,tmkr045,Relatorio de Posicao Geral do Telecobranca,Call Center,1
+Call Center,tmkr046,Posicao Geral da Fila de Telecobranca,Call Center,1
+Call Center,tmkr043,Relatorio do Cenário de Telecobranca,Call Center,1
+Call Center,tmkr506,Relatorio Impressao de chamados,Call Center,1
+Call Center,tmkr027,Relatorio de Campanhas,Call Center,1
+Call Center,tmkr040,Relatorio de Historico de cobranca,Call Center,1
+Call Center,tmkr504,BackLog do Atendimento,Call Center,1
+Projetos,pmsr250,Apontamentos de Recursos do Projeto,Gestão de Projetos,1
+Projetos,pmsr060,Relação de Projetos,Gestão de Projetos,1
+Projetos,pmsr170,Quantitativos Previsto x Realizado,Gestão de Projetos,1
+Projetos,pmsr030,Orçamentos,Gestão de Projetos,1
+Projetos,pmsr360,Empenho do Projeto,Gestão de Projetos,1
+Projetos,pmsr230,Despesas do Projeto,Gestão de Projetos,1
+Projetos,pmsr210,Relatorio de alocacao de recursoss,Gestão de Projetos,1
+Projetos,pmsr270,Cronograma Financeiro,Gestão de Projetos,1
+Projetos,pmsr380,Alocação de Recursos,Gestão de Projetos,1
+Projetos,pmsr150,Quantitativos,Gestão de Projetos,1
+Projetos,pmsr160,Analise Execução,Gestão de Projetos,1
+Projetos,pmsr190,Lista de Produtos,Gestão de Projetos,1
+Projetos,pmsr010,Composições,Gestão de Projetos,1
+Projetos,pmsr110,Cronograma Fisico,Gestão de Projetos,1
+Projetos,pmsr120,Cronograma financeiro Projeto,Gestão de Projetos,1
+Projetos,pmsr330,Despesas,Gestão de Projetos,1
+Projetos,pmsr180,Fluxo de caixa,Gestão de Projetos,1
+Projetos,pmsr070,Cronograma Fisico,Gestão de Projetos,1
+Projetos,pmsr310,Fluxo de caixa,Gestão de Projetos,1
+Projetos,pmsr080,Cronograma Financeiro,Gestão de Projetos,1
+Projetos,pmsr300,Cronograma Financeiro,Gestão de Projetos,1
+Projetos,pmsr090,Alocação de Recursos,Gestão de Projetos,1
+Projetos,pmsr220,Receitas do Projeto,Gestão de Projetos,1
+Projetos,pmsr340,Projetos Previsto x Realizado,Gestão de Projetos,1
+Projetos,pmsr140,Curva ABC Custos,Gestão de Projetos,1
+Projetos,pmsr040,Curva ABC Orçamentos,Gestão de Projetos,1
+Projetos,pmsr320,Receitas do Projeto,Gestão de Projetos,1
+Projetos,pmsr240,Pré Apontamento,Gestão de Projetos,1
+Projetos,pmsr050,Quantitativos Orçamento,Gestão de Projetos,1
+Projetos,pmsr105,Extrato Projeto x Tarefa Projeto,Gestão de Projetos,1
+Projetos,pmsr106,Relatorio de Extrato de Recurso por Tipo de Tarefa,Gestão de Projetos,1
+Projetos,pmsr100,Tarefas em atraso,Gestão de Projetos,1
+Projetos,pmsr017,Demonstrativo de Rejeicoes,Gestão de Projetos,1
+Projetos,pmsr130,Historico de revisões,Gestão de Projetos,1
+Faturamento,matr550,Relaçao Notas Fiscais,Faturamento,1
+Faturamento,matr020,Relacao de Clientes,Faturamento,1
+Faturamento,matr780,Relacao de Vendas por Cliente,Faturamento,1
+Faturamento,matr590,Faturamento por Cliente,Faturamento,1
+Faturamento,matr660,Resumo de Vendas,Faturamento,1
+Faturamento,matr700,Relacao de Pedidos aptos a faturar,Faturamento,1
+Faturamento,matr730,Emissao da Pre Nota,Faturamento,1
+Faturamento,matr680,Relacao de Pedidos nao entregues,Faturamento,1
+Faturamento,matr600,Relacao de Pedidos de Vendas por Vendedor/Cliente,Faturamento,1
+Faturamento,matr580,Estatistica de Venda por Ordem de Vendedor,Faturamento,1
+Faturamento,matr540,Relatorio de Comissoes,Faturamento,1
+Faturamento,matr610,Relacao de Pedidos de Vendas por Vendedor/Produto,Faturamento,1
+Faturamento,matr770,Relação das Devoluções,Faturamento,1
+Faturamento,matr620,Relacao Vendas por Produto,Faturamento,1
+Faturamento,matr640,Relacao de Duplicatas,Faturamento,1
+Faturamento,matr050,Emissao da relacao de Vendedores,Faturamento,1
+Faturamento,matr560,Estatistica de Venda por Prazo de Pagamento,Faturamento,1
+Faturamento,fatr120,Faturamento Real por Agrupador,Faturamento,1
+Faturamento,matr060,Emissao da relacao de Transportadoras,Faturamento,1
+Faturamento,matr650,Relacao de Notas Fiscais por Transportadora,Faturamento,1
+Faturamento,matr605,Relacao de Orçamentos de Venda,Faturamento,1
+Faturamento,matr720,Minuta de Despacho,Faturamento,1
+Faturamento,matr370,Relatorio do Cadastro de Amarracao Produtos x Clientes,Faturamento,1
+Faturamento,matr790,Romaneio de Despacho,Faturamento,1
+Faturamento,matr775,Pick-List (Expedicao),Faturamento,1
+Faturamento,matr690,Disponibilidade de Estoque para Vendas,Faturamento,1
+Faturamento,matr710,Etiquetas para os volumes,Faturamento,1
+Faturamento,matr185,Impressao Carta de Correcao,Faturamento,1
+Faturamento,fatr080,Relatorio de cancelamentos e descontos,Faturamento,1
+Faturamento,matr025,Sugestao de Orçamentos,Faturamento,1
+Faturamento,matr530,Relacao de Visitas,Faturamento,1
+Faturamento,fatr030,Relacao de contratos de Parceria,Faturamento,1
+Faturamento,matr755,Relatorio de Curva ABC de Consumo de Vendas por Regiao,Faturamento,1
+Faturamento,matr785,Lista de Precos Por Clientes,Faturamento,1
+Faturamento,fatr010,Relatório de oportunidades,Faturamento,1
+Faturamento,matr795,Quantidades em Grades,Faturamento,1
+Faturamento,matr777,Picklist,Faturamento,1
+Faturamento,matr615,Instrução de Montagem,Faturamento,1
+Faturamento,fatr070,Oportunidades X Processos de Vendas,Faturamento,1
+Faturamento,matr325,Relatorio de Historico de alteracoes de preco,Faturamento,1
+Faturamento,matr012,Relatorio de Correlacao,Faturamento,1
+Faturamento,fatr060,Oportunidades X Processos de Vendas,Faturamento,1
+Compras,COMR040,Pedido de Compras com abertura analítica por status,Compras,1
+Compras,COMR041,Pedido de Compras com divergência,Compras,1
+Compras,COMR042,Passo a passo processo de Solicitação de Compras,Compras,1
+Compras,COMR043,Lista de Fornecedores - Último Preço,Compras,1
+Compras,COMR100,Relação dos Documentos de Cobertura,Compras,1
+Compras,COMR103,Compra com Entrega Futura,Compras,1
+Compras,MATR015,Notas Fiscais de Origem x Notas Fiscais Frete,Compras,1
+Compras,MATR030,Fornecedores,Compras,1
+Compras,MATR040,Ficha Cadastral,Compras,1
+Compras,MATR080,Relação das Notas Fiscais,Compras,1
+Compras,MATR086,Grupos de Compras,Compras,1
+Compras,MATR090,Itens das Notas Fiscais,Compras,1
+Compras,MATR091,Relação de Compras,Compras,1
+Compras,MATR110,Pedido de Compras,Compras,1
+Compras,MATR110A,Pedido de Compras - Modelo 2,Compras,1
+Compras,MATR120,Relação Pedidos em aberto,Compras,1
+Compras,MATR125,Impressão do Contrato de Parceria,Compras,1
+Compras,MATR126,Contratos de Parceria x Títulos - Mapa de Contratos,Compras,1
+Compras,MATR130,Divergências Pedido de Compras x Notas Fiscais,Compras,1
+Compras,MATR140,Solicitação de Compras,Compras,1
+Compras,MATR150,Cotações,Compras,1
+Compras,MATR160,Cotações em Aberto,Compras,1
+Compras,MATR170,Boletim de Entrada,Compras,1
+Compras,MATR180,Nota de Fiscal de Devolução,Compras,1
+Compras,MATR190,Produto x Fornecedor,Compras,1
+Compras,MATR195,Grupo x Fornecedor,Compras,1
+Compras,MATR200,Divergências Solicitação de Compras x Pedido de Compras,Compras,1
+Compras,MATR210,Análise de Cotações,Compras,1
+Compras,MATR440,Item em Ponto de Pedido,Compras,1
+Compras,MATR441,Itens de Contrato p/ gerar Autorização de Entrega,Compras,1
+Compras,MATR952,Relação Contratos de Parceria,Compras,1
+Gestão de Compras Públicas,GCPR001,Posição do Edital,Gestão de Compras Públicas,0
+Gestão de Compras Públicas,GCPR003,Extrato de Homologação,Gestão de Compras Públicas,0
+Gestão de Compras Públicas,GCPR002,Quadro de Licitações,Gestão de Compras Públicas,0
+Gestão de Compras Públicas,GCPR004,Termo de Homologação,Gestão de Compras Públicas,0
+Gestão de Contratos,cntr010,Contratos,Gestão de Contratos,1
+Gestão de Contratos,cntr031,Medições,Gestão de Contratos,1
+Gestão de Contratos,cntr040,Boletim de medição,Gestão de Contratos,1
+Gestão de Contratos,cntr050,Medição x NF,Gestão de Contratos,1
+Gestão de Contratos,cntr121,Medições não efetuadas,Gestão de Contratos,1
+Gestão de Contratos,cntr020,Revisões de contrato,Gestão de Contratos,1
+Gestão de Contratos,cntr300,Multas e bonificações por contrato,Gestão de Contratos,1
